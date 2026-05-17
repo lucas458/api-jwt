@@ -1,0 +1,2 @@
+Desenvolver o Journal API seguindo todas as orientações do PDF abaixo
+
