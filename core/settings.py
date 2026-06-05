@@ -100,12 +100,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+db_env_var = 'POSTGRES_URL_NON_POOLING' if 'POSTGRES_URL_NON_POOLING' in os.environ else ('POSTGRES_URL' if 'POSTGRES_URL' in os.environ else 'DATABASE_URL')
+
 DATABASES = {
     'default': dj_database_url.config(
-        env='POSTGRES_URL' if 'POSTGRES_URL' in os.environ else 'DATABASE_URL',
+        env=db_env_var,
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
+        conn_max_age=0,
     )
 }
 
